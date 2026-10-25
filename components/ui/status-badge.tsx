@@ -7,6 +7,7 @@ const styles = {
   success: "border-[#5a5246] bg-[#302b24] text-sandstone",
   filtered: "border-border bg-elevated text-taupe",
   failed: "border-[#6b4b48] bg-[#2b211f] text-[#f0c9c4]",
+  skipped: "border-border bg-elevated text-taupe",
   connected: "border-[#5a5246] bg-[#302b24] text-sandstone",
   disconnected: "border-border bg-elevated text-taupe",
   configured: "border-[#5a5246] bg-[#302b24] text-sandstone",

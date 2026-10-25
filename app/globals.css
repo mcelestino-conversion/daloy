@@ -57,6 +57,49 @@ dialog::backdrop {
   scrollbar-width: thin;
 }
 
+.workflow-node {
+  position: relative;
+  background: radial-gradient(ellipse at 50% 0%, #3b352d 0%, #242321 78%);
+  border: 1px solid #48433c;
+  border-radius: 12px;
+  color: var(--ivory);
+  transition: border-color 150ms ease, transform 150ms ease;
+}
+
+.workflow-node:hover {
+  border-color: #6b645a;
+}
+
+.workflow-node.selected,
+.workflow-node.running {
+  border-color: var(--sandstone);
+}
+
+.react-flow__controls {
+  overflow: hidden;
+  border: 1px solid var(--border) !important;
+  border-radius: 9px !important;
+  box-shadow: none !important;
+}
+
+.react-flow__controls-button {
+  width: 34px !important;
+  height: 34px !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--border) !important;
+  background: var(--elevated) !important;
+  fill: var(--taupe) !important;
+}
+
+.react-flow__controls-button:hover {
+  background: var(--surface) !important;
+  fill: var(--ivory) !important;
+}
+
+.react-flow__controls-button:last-child {
+  border-bottom: 0 !important;
+}
+
 button,
 input,
 select,

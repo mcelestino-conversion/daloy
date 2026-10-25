@@ -6,6 +6,7 @@ import { WorkspaceProvider } from "@/components/providers/workspace-provider";
 import { AppShell } from "@/components/shell/app-shell";
 
 import "./globals.css";
+import "@xyflow/react/dist/style.css";
 
 export const metadata: Metadata = {
   title: "Daloy — Make work flow",
