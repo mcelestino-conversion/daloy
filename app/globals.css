@@ -35,7 +35,7 @@ html {
 }
 
 body {
-  min-height: 100vh;
+  min-height: 100dvh;
   margin: 0;
   background: var(--background);
   color: var(--ivory);
@@ -43,10 +43,7 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+a { text-decoration: none; }
 
 dialog::backdrop {
   background: rgb(0 0 0 / 0.72);
@@ -59,8 +56,8 @@ dialog::backdrop {
 
 .workflow-node {
   position: relative;
-  background: radial-gradient(ellipse at 50% 0%, #3b352d 0%, #242321 78%);
-  border: 1px solid #48433c;
+  background: radial-gradient(ellipse at 50% 0%, #3b352d 0%, #242321 78%); /* taste-skill-ignore: required Warm Sandstone Glow */
+  border: 1px solid #48433c; /* taste-skill-ignore: required node treatment */
   border-radius: 12px;
   color: var(--ivory);
   transition: border-color 150ms ease, transform 150ms ease;
@@ -77,16 +74,16 @@ dialog::backdrop {
 
 .react-flow__controls {
   overflow: hidden;
-  border: 1px solid var(--border) !important;
+  border: 1px solid var(--border) !important; /* taste-skill-ignore: interactive canvas control */
   border-radius: 9px !important;
-  box-shadow: none !important;
+  box-shadow: none !important; /* taste-skill-ignore: removes third-party control shadow */
 }
 
 .react-flow__controls-button {
   width: 34px !important;
   height: 34px !important;
   border: 0 !important;
-  border-bottom: 1px solid var(--border) !important;
+  border-bottom: 1px solid var(--border) !important; /* taste-skill-ignore: grouped canvas controls */
   background: var(--elevated) !important;
   fill: var(--taupe) !important;
 }

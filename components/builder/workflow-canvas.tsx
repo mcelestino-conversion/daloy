@@ -31,7 +31,7 @@ export function WorkflowCanvas({ workflow, selectedNodeId, onSelect, onInsert, e
 
   return (
     <div className="hidden h-full min-h-0 bg-canvas lg:block" aria-label="Workflow canvas">
-      <ReactFlow nodes={nodes} edges={edges} nodeTypes={nodeTypes} nodesDraggable={false} nodesConnectable={false} onNodeClick={(_, node) => onSelect(node.id)} fitView fitViewOptions={{ padding: 0.24 }} minZoom={0.45} maxZoom={1.4} proOptions={{ hideAttribution: true }}>
+      <ReactFlow nodes={nodes} edges={edges} nodeTypes={nodeTypes} nodesDraggable={false} nodesConnectable={false} onNodeClick={(_, node) => onSelect(node.id)} fitView fitViewOptions={{ padding: 0.24 }} minZoom={0.45} maxZoom={1.4}>
         <Background variant={BackgroundVariant.Dots} color="#5D574E" gap={20} size={1.25} />
         <Controls showInteractive={false} position="bottom-left" />
       </ReactFlow>

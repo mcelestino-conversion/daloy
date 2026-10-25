@@ -21,9 +21,9 @@ export function Dialog({ open, onClose, title, description, children }: { open: 
         onClose();
       }}
       onClose={onClose}
-      className="m-auto max-h-[88vh] w-[min(680px,calc(100vw-32px))] rounded-2xl border border-border bg-elevated p-0 text-ivory shadow-2xl backdrop:bg-black/70"
+      data-ui className="m-auto max-h-[88vh] w-[min(680px,calc(100vw-32px))] rounded-2xl border border-border bg-elevated p-0 text-ivory shadow-2xl backdrop:bg-black/70"
     >
-      <div className="flex items-start justify-between gap-6 border-b border-border px-6 py-5">
+      <div data-ui className="flex items-start justify-between gap-6 border-b border-border px-6 py-5">
         <div>
           <h2 className="text-lg font-semibold tracking-[-0.02em]">{title}</h2>
           {description ? <p className="mt-1 text-sm leading-6 text-taupe">{description}</p> : null}

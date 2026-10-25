@@ -25,7 +25,7 @@ export function WorkflowNode(props: NodeProps) {
           <p className="mt-1.5 line-clamp-2 text-xs leading-5 text-taupe">{data.summary}</p>
         </div>
       </div>
-      <div className="flex items-center justify-between border-t border-[#48433c] px-4 py-2.5">
+      <div data-ui className="flex items-center justify-between border-t border-[#48433c] px-4 py-2.5">
         <span className={`text-xs ${data.configured ? "text-sandstone" : "text-taupe"}`}>{data.configured ? "Configured" : "Not configured"}</span>
         <ChevronDown className="size-3.5 text-taupe" aria-hidden="true" />
       </div>

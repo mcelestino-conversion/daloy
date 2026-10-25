@@ -22,3 +22,10 @@ test("invalid or incompatible storage recovers to deterministic demo data", () =
   assert.deepEqual(invalidJson.snapshot, createDemoSnapshot());
   assert.deepEqual(wrongVersion.snapshot, createDemoSnapshot());
 });
+
+test("a first visit seeds demo data without reporting a recovery", () => {
+  const firstVisit = parseWorkspaceSnapshot(null);
+
+  assert.equal(firstVisit.recovered, false);
+  assert.deepEqual(firstVisit.snapshot, createDemoSnapshot());
+});

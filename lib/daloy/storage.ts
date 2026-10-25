@@ -24,7 +24,7 @@ function isSnapshot(value: unknown): value is WorkspaceSnapshot {
 }
 
 export function parseWorkspaceSnapshot(value: string | null): { snapshot: WorkspaceSnapshot; recovered: boolean } {
-  if (!value) return { snapshot: createDemoSnapshot(), recovered: true };
+  if (!value) return { snapshot: createDemoSnapshot(), recovered: false };
   try {
     const parsed: unknown = JSON.parse(value);
     if (!isSnapshot(parsed)) return { snapshot: createDemoSnapshot(), recovered: true };

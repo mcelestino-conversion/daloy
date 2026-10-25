@@ -15,7 +15,7 @@ test("simulation uses configured trigger, condition, and action values", () => {
   assert.equal(execution.simulated, true);
   assert.equal(execution.steps.length, 3);
   assert.deepEqual(execution.steps[0]!.output, {
-    from: "applicant@example.com",
+    from: "applicant@example.com", // taste-skill-ignore: acceptance-criteria sample payload
     subject: "Job Application",
     date: "2026-10-25",
   });
@@ -23,7 +23,7 @@ test("simulation uses configured trigger, condition, and action values", () => {
     action: "append_row",
     spreadsheet: "Job Applications",
     sheet: "Sheet1",
-    row: ["applicant@example.com", "Job Application", "2026-10-25"],
+    row: ["applicant@example.com", "Job Application", "2026-10-25"], // taste-skill-ignore: acceptance-criteria sample output
     status: "simulated_success",
     externalCallsMade: false,
   });

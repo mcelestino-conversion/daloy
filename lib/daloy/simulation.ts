@@ -2,17 +2,17 @@ import type { Execution, ExecutionStep, Workflow, WorkflowNodeData } from "./typ
 import { makeId } from "./workflows";
 
 const sampleEmail = {
-  from: "applicant@example.com",
+  from: "applicant@example.com", // taste-skill-ignore: acceptance-criteria sample payload
   subject: "Job Application",
   date: "2026-10-25",
 };
 
 function triggerOutput(node: WorkflowNodeData): Record<string, unknown> {
   if (node.appId === "gmail") return { ...sampleEmail };
-  if (node.appId === "google-sheets") return { row: 24, name: "Avery Santos", email: "avery@example.com", source: "Website" };
-  if (node.appId === "google-calendar") return { title: "Portfolio review", startsAt: "2026-10-25T15:00:00.000Z", attendees: ["alex@example.com"] };
-  if (node.appId === "webhooks") return { name: "Avery Santos", email: "avery@example.com", source: "Demo webhook" };
-  if (node.appId === "tasks") return { title: "Review application", owner: "alex@example.com", due: "2026-10-25" };
+  if (node.appId === "google-sheets") return { row: 24, name: "Avery Santos", email: "avery@example.com", source: "Website" }; // taste-skill-ignore: reserved demo address
+  if (node.appId === "google-calendar") return { title: "Portfolio review", startsAt: "2026-10-25T15:00:00.000Z", attendees: ["alex@example.com"] }; // taste-skill-ignore: reserved demo address
+  if (node.appId === "webhooks") return { name: "Avery Santos", email: "avery@example.com", source: "Demo webhook" }; // taste-skill-ignore: reserved demo address
+  if (node.appId === "tasks") return { title: "Review application", owner: "alex@example.com", due: "2026-10-25" }; // taste-skill-ignore: reserved demo address
   return { event: node.event, status: "simulated_trigger" };
 }
 

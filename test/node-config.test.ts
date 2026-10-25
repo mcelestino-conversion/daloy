@@ -27,6 +27,7 @@ test("node summaries are derived from editable configuration", () => {
 test("node validation returns concise missing-field errors", () => {
   assert.deepEqual(validateNodeConfig(condition), []);
   assert.deepEqual(validateNodeConfig({ ...condition, config: { field: "subject", operator: "contains", value: "" } }), ["Comparison value is required."]);
+  assert.deepEqual(validateNodeConfig({ ...condition, type: "trigger", appId: "webhooks", config: {} }), ["Demo path is required."]);
 });
 
 test("step choices create configured sequential node candidates", () => {

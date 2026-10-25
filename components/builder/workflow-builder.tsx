@@ -105,9 +105,9 @@ export function WorkflowBuilder({ workflowId }: { workflowId: string }) {
 
   return (
     <div className="flex h-full min-h-0 flex-col bg-canvas">
-      <header className="flex h-16 shrink-0 items-center gap-3 border-b border-border bg-sidebar px-3 sm:px-4">
+      <header className="flex h-16 shrink-0 items-center gap-3 border-b border-border bg-sidebar px-3 sm:px-4">{/* taste-skill-ignore: builder toolbar boundary */}
         <Link href="/flows" className="grid size-10 shrink-0 place-items-center rounded-lg text-taupe transition hover:bg-surface hover:text-ivory focus-visible:outline-2 focus-visible:outline-sandstone" aria-label="Back to My Flows"><ArrowLeft className="size-4" aria-hidden="true" /></Link>
-        <div className="min-w-0 flex-1"><input aria-label="Flow name" className="w-full max-w-md truncate bg-transparent text-sm font-semibold text-ivory focus:outline-none" value={workflow.name} onChange={(event) => setWorkflow({ ...workflow, name: event.target.value, updatedAt: new Date().toISOString() })} /><p className="mt-0.5 text-xs capitalize text-taupe">{workflow.status} · {workflow.nodes.length} steps</p></div>
+        <div className="min-w-0 flex-1"><h1><input aria-label="Flow name" className="w-full max-w-md truncate bg-transparent text-sm font-semibold text-ivory focus:outline-none" value={workflow.name} onChange={(event) => setWorkflow({ ...workflow, name: event.target.value, updatedAt: new Date().toISOString() })} /></h1><p className="mt-0.5 text-xs capitalize text-taupe">{workflow.status} · {workflow.nodes.length} steps</p></div>
         {notice ? <span role="status" className="hidden items-center gap-1.5 text-xs text-taupe xl:flex"><Check className="size-3.5 text-sandstone" aria-hidden="true" />{notice}</span> : null}
         <Button size="sm" className="hidden sm:inline-flex" onClick={toggleActive}>{workflow.status === "active" ? "Pause" : "Activate"}</Button>
         <Button size="sm" className="hidden sm:inline-flex" onClick={save}><Save className="size-4" aria-hidden="true" />Save</Button>

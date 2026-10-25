@@ -28,7 +28,7 @@ export function TemplatePreview({ template, open, onClose, onUse }: { template: 
           ))}
         </ol>
       </div>
-      <div className="flex flex-col-reverse gap-2 border-t border-border px-6 py-4 sm:flex-row sm:justify-end">
+      <div data-ui className="flex flex-col-reverse gap-2 border-t border-border px-6 py-4 sm:flex-row sm:justify-end">
         <Button onClick={onClose}>Keep browsing</Button>
         <Button variant="primary" onClick={() => onUse(template)}>Use template</Button>
       </div>

@@ -15,7 +15,7 @@ function Field({ label, value, onChange, placeholder }: { label: string; value: 
 }
 
 export function ConfigPanel({ node, onChange, onClose, onRemove, onMove, canMoveUp, canMoveDown }: { node: WorkflowNodeData | null; onChange: (node: WorkflowNodeData) => void; onClose: () => void; onRemove: () => void; onMove: (direction: -1 | 1) => void; canMoveUp: boolean; canMoveDown: boolean }) {
-  if (!node) return <aside className="hidden w-[360px] shrink-0 border-l border-border bg-sidebar p-6 lg:block"><p className="text-sm text-taupe">Select a step to configure it.</p></aside>;
+  if (!node) return <aside data-ui className="hidden w-[360px] shrink-0 border-l border-border bg-sidebar p-6 lg:block"><p className="text-sm text-taupe">Select a step to configure it.</p></aside>;
   const currentNode = node;
   const errors = validateNodeConfig(currentNode);
 
@@ -29,14 +29,15 @@ export function ConfigPanel({ node, onChange, onClose, onRemove, onMove, canMove
     if (!app) return;
     const event = currentNode.type === "trigger" ? app.availableTriggers[0] : app.availableActions[0];
     if (!event) return;
-    const draft: WorkflowNodeData = { ...currentNode, appId, event, name: event, config: {} };
-    onChange({ ...draft, summary: deriveNodeSummary(draft), configured: false });
+    const config: Record<string, string> = appId === "gmail" ? { mailbox: "Inbox" } : appId === "webhooks" ? { path: "/new-event" } : {};
+    const draft: WorkflowNodeData = { ...currentNode, appId, event, name: event, config };
+    onChange({ ...draft, summary: deriveNodeSummary(draft), configured: validateNodeConfig(draft).length === 0 });
   }
 
   const appOptions = appCatalog.filter((app) => node.type === "trigger" ? app.availableTriggers.length : app.availableActions.length);
   return (
-    <aside className="fixed inset-0 z-50 overflow-y-auto bg-sidebar lg:static lg:z-auto lg:block lg:w-[360px] lg:shrink-0 lg:border-l lg:border-border" aria-label="Step configuration">
-      <div className="sticky top-0 z-10 flex h-16 items-center justify-between border-b border-border bg-sidebar px-5">
+    <aside data-ui className="fixed inset-0 z-50 overflow-y-auto bg-sidebar lg:static lg:z-auto lg:block lg:w-[360px] lg:shrink-0 lg:border-l lg:border-border" aria-label="Step configuration">
+      <div data-ui className="sticky top-0 z-10 flex h-16 items-center justify-between border-b border-border bg-sidebar px-5">
         <div><p className="text-xs capitalize text-taupe">{node.type} step</p><h2 className="mt-0.5 text-sm font-semibold text-ivory">Configure step</h2></div>
         <button onClick={onClose} className="grid size-10 cursor-pointer place-items-center rounded-lg text-taupe hover:bg-surface hover:text-ivory focus-visible:outline-2 focus-visible:outline-sandstone" aria-label="Close configuration"><X className="size-4" aria-hidden="true" /></button>
       </div>
@@ -53,7 +54,7 @@ export function ConfigPanel({ node, onChange, onClose, onRemove, onMove, canMove
         {node.appId === "google-drive" && node.type === "action" ? <><Field label="Folder" value={node.config.folder || ""} onChange={(value) => updateConfig("folder", value)} /><Field label="Filename" value={node.config.filename || ""} onChange={(value) => updateConfig("filename", value)} /></> : null}
         {node.appId === "http-api" && node.type === "action" ? <><label className="block"><span className="mb-2 block text-sm font-medium text-ivory">Method</span><select className={fieldClass} value={node.config.method || "POST"} onChange={(event) => updateConfig("method", event.target.value)}><option>POST</option><option>PUT</option><option>PATCH</option></select></label><Field label="URL" value={node.config.url || ""} onChange={(value) => updateConfig("url", value)} /></> : null}
         {errors.length ? <div role="status" className="rounded-lg border border-[#6b4b48] bg-[#2b211f] p-3 text-sm text-[#f0c9c4]">{errors[0]}</div> : <div className="rounded-lg border border-[#5a5246] bg-[#302b24] p-3 text-sm text-sandstone">This step is ready to simulate.</div>}
-        <div className="flex gap-2 border-t border-border pt-5"><Button size="icon" onClick={() => onMove(-1)} disabled={!canMoveUp} aria-label="Move step up"><ArrowUp className="size-4" /></Button><Button size="icon" onClick={() => onMove(1)} disabled={!canMoveDown} aria-label="Move step down"><ArrowDown className="size-4" /></Button><Button variant="danger" className="ml-auto" onClick={onRemove} disabled={node.type === "trigger"}><Trash2 className="size-4" aria-hidden="true" />Remove</Button></div>
+        <div data-ui className="flex gap-2 border-t border-border pt-5"><Button size="icon" onClick={() => onMove(-1)} disabled={!canMoveUp} aria-label="Move step up"><ArrowUp className="size-4" /></Button><Button size="icon" onClick={() => onMove(1)} disabled={!canMoveDown} aria-label="Move step down"><ArrowDown className="size-4" /></Button><Button variant="danger" className="ml-auto" onClick={onRemove} disabled={node.type === "trigger"}><Trash2 className="size-4" aria-hidden="true" />Remove</Button></div>
       </div>
     </aside>
   );

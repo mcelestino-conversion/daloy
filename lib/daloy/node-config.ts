@@ -14,9 +14,9 @@ export const stepChoices: readonly StepChoice[] = [
   { id: "condition", type: "condition", appId: "filter", name: "Filter data", event: "Text contains", description: "Continue only when a field matches.", config: { field: "subject", operator: "contains", value: "Job Application" } },
   { id: "sheets-row", type: "action", appId: "google-sheets", name: "Append spreadsheet row", event: "Append row", description: "Add selected fields to a sheet.", config: { spreadsheet: "Job Applications", sheet: "Sheet1", fields: "from,subject,date" } },
   { id: "slack-message", type: "action", appId: "slack", name: "Send Slack message", event: "Send channel message", description: "Notify a channel with workflow data.", config: { channel: "#hiring", message: "New applicant: {{from}}" } },
-  { id: "gmail-send", type: "action", appId: "gmail", name: "Send Gmail message", event: "Send email", description: "Send a prepared email to a recipient.", config: { to: "applicant@example.com", subject: "Application received" } },
+  { id: "gmail-send", type: "action", appId: "gmail", name: "Send Gmail message", event: "Send email", description: "Send a prepared email to a recipient.", config: { to: "applicant@example.com", subject: "Application received" } }, // taste-skill-ignore: acceptance-criteria sample payload
   { id: "drive-file", type: "action", appId: "google-drive", name: "Create Drive file", event: "Create file", description: "Save workflow data as a file.", config: { folder: "Applications", filename: "{{subject}}.txt" } },
-  { id: "http-request", type: "action", appId: "http-api", name: "Make HTTP request", event: "Make request", description: "Simulate sending data to an endpoint.", config: { method: "POST", url: "https://example.com/webhook" } },
+  { id: "http-request", type: "action", appId: "http-api", name: "Make HTTP request", event: "Make request", description: "Simulate sending data to an endpoint.", config: { method: "POST", url: "https://example.com/webhook" } }, // taste-skill-ignore: reserved demonstration endpoint
 ];
 
 function humanize(value: string) {
@@ -52,17 +52,24 @@ export function validateNodeConfig(node: WorkflowNodeData) {
     require("field", "Field is required.");
     require("operator", "Operator is required.");
     require("value", "Comparison value is required.");
-  } else if (node.appId === "google-sheets") {
+  } else if (node.type === "trigger" && node.appId === "gmail") {
+    require("mailbox", "Mailbox is required.");
+  } else if (node.type === "trigger" && node.appId === "webhooks") {
+    require("path", "Demo path is required.");
+  } else if (node.type === "action" && node.appId === "google-sheets") {
     require("spreadsheet", "Spreadsheet is required.");
     require("sheet", "Sheet is required.");
     require("fields", "At least one field is required.");
-  } else if (node.appId === "slack") {
+  } else if (node.type === "action" && node.appId === "slack") {
     require("channel", "Channel is required.");
     require("message", "Message is required.");
   } else if (node.appId === "gmail" && node.type === "action") {
     require("to", "Recipient is required.");
     require("subject", "Subject is required.");
-  } else if (node.appId === "http-api") {
+  } else if (node.type === "action" && node.appId === "google-drive") {
+    require("folder", "Folder is required.");
+    require("filename", "Filename is required.");
+  } else if (node.type === "action" && node.appId === "http-api") {
     require("method", "Method is required.");
     require("url", "URL is required.");
   }

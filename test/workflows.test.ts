@@ -32,6 +32,8 @@ test("blank and duplicated workflows receive independent IDs", () => {
   const duplicate = duplicateWorkflow(blank, { id: "blank-2", now });
 
   assert.equal(blank.id, "blank-1");
+  assert.equal(blank.nodes[0]!.event, "Catch hook");
+  assert.equal(blank.nodes[0]!.configured, false);
   assert.equal(duplicate.id, "blank-2");
   assert.equal(duplicate.name, "Untitled flow copy");
   assert.notEqual(duplicate.nodes[0]!.id, blank.nodes[0]!.id);
