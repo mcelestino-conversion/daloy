@@ -1,4 +1,5 @@
 import type { Template, WorkflowNodeData } from "./types";
+import { getApp } from "./catalog";
 
 function node(
   id: string,
@@ -96,3 +97,14 @@ export const workflowTemplates: readonly Template[] = Object.freeze([
 ]);
 
 export const templateCategories = ["All", "Productivity", "Communication", "Data", "Developer tools"] as const;
+
+export function filterTemplates(templates: readonly Template[], query: string, category: string) {
+  const needle = query.trim().toLocaleLowerCase();
+  return templates.filter((template) => {
+    const inCategory = category === "All" || template.category === category;
+    if (!inCategory) return false;
+    if (!needle) return true;
+    const appNames = template.appIds.map((appId) => getApp(appId)?.name ?? appId).join(" ");
+    return `${template.name} ${template.description} ${appNames}`.toLocaleLowerCase().includes(needle);
+  });
+}
