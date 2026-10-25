@@ -94,6 +94,15 @@ export function duplicateWorkflow(workflow: Workflow, options: CreateOptions = {
   };
 }
 
+export function nextDuplicateName(sourceName: string, existingNames: readonly string[]) {
+  const occupied = new Set(existingNames.map((name) => name.toLocaleLowerCase()));
+  const first = `${sourceName} copy`;
+  if (!occupied.has(first.toLocaleLowerCase())) return first;
+  let suffix = 2;
+  while (occupied.has(`${first} ${suffix}`.toLocaleLowerCase())) suffix += 1;
+  return `${first} ${suffix}`;
+}
+
 export function insertNode(workflow: Workflow, node: WorkflowNodeData, index: number, now?: string) {
   const next = [...workflow.nodes];
   next.splice(Math.max(0, Math.min(index, next.length)), 0, { ...node, config: { ...node.config } });

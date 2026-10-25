@@ -5,6 +5,7 @@ const styles = {
   active: "border-[#5a5246] bg-[#302b24] text-sandstone",
   paused: "border-border bg-surface text-taupe",
   success: "border-[#5a5246] bg-[#302b24] text-sandstone",
+  running: "border-[#5a5246] bg-[#302b24] text-sandstone",
   filtered: "border-border bg-elevated text-taupe",
   failed: "border-[#6b4b48] bg-[#2b211f] text-[#f0c9c4]",
   skipped: "border-border bg-elevated text-taupe",
