@@ -4,6 +4,8 @@ import type { Connection, Execution, Workflow } from "./types";
 export const STORAGE_VERSION = 1;
 export const STORAGE_KEY = "daloy.workspace.v1";
 
+export type StorageLike = Pick<Storage, "getItem" | "setItem" | "removeItem">;
+
 export type WorkspaceSnapshot = {
   version: typeof STORAGE_VERSION;
   workflows: Workflow[];
@@ -30,4 +32,12 @@ export function parseWorkspaceSnapshot(value: string | null): { snapshot: Worksp
   } catch {
     return { snapshot: createDemoSnapshot(), recovered: true };
   }
+}
+
+export function loadWorkspace(storage: StorageLike) {
+  return parseWorkspaceSnapshot(storage.getItem(STORAGE_KEY));
+}
+
+export function saveWorkspace(storage: StorageLike, snapshot: WorkspaceSnapshot) {
+  storage.setItem(STORAGE_KEY, serializeWorkspaceSnapshot(snapshot));
 }

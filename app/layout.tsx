@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
 import type { ReactNode } from "react";
 
+import { WorkspaceProvider } from "@/components/providers/workspace-provider";
+import { AppShell } from "@/components/shell/app-shell";
+
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -12,7 +15,11 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
     <html lang="en" className={GeistSans.variable}>
-      <body>{children}</body>
+      <body>
+        <WorkspaceProvider>
+          <AppShell>{children}</AppShell>
+        </WorkspaceProvider>
+      </body>
     </html>
   );
 }
