@@ -1,0 +1,7 @@
+node_modules/
+.next/
+tsconfig.tsbuildinfo
+.taste-skill/
+playwright-report/
+test-results/
+.DS_Store
