@@ -1,0 +1,130 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-geist-sans), "Inter", system-ui, sans-serif;
+  --color-background: #141414;
+  --color-canvas: #1a1917;
+  --color-sidebar: #1b1a18;
+  --color-surface: #242321;
+  --color-elevated: #292723;
+  --color-border: #393732;
+  --color-sandstone: #d6c2a4;
+  --color-ivory: #f5f0e8;
+  --color-taupe: #a9a198;
+}
+
+:root {
+  color-scheme: dark;
+  --background: #141414;
+  --canvas: #1a1917;
+  --sidebar: #1b1a18;
+  --surface: #242321;
+  --elevated: #292723;
+  --border: #393732;
+  --sandstone: #d6c2a4;
+  --ivory: #f5f0e8;
+  --taupe: #a9a198;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--background);
+}
+
+body {
+  min-height: 100dvh;
+  margin: 0;
+  background: var(--background);
+  color: var(--ivory);
+  font-family: var(--font-geist-sans), "Inter", system-ui, sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+a { text-decoration: none; }
+
+dialog::backdrop {
+  background: rgb(0 0 0 / 0.72);
+}
+
+* {
+  scrollbar-color: #4a4741 #1a1917;
+  scrollbar-width: thin;
+}
+
+.workflow-node {
+  position: relative;
+  background: radial-gradient(ellipse at 50% 0%, #3b352d 0%, #242321 78%); /* taste-skill-ignore: required Warm Sandstone Glow */
+  border: 1px solid #48433c; /* taste-skill-ignore: required node treatment */
+  border-radius: 12px;
+  color: var(--ivory);
+  transition: border-color 150ms ease, transform 150ms ease;
+}
+
+.workflow-node:hover {
+  border-color: #6b645a;
+}
+
+.workflow-node.selected,
+.workflow-node.running {
+  border-color: var(--sandstone);
+}
+
+.react-flow__controls {
+  overflow: hidden;
+  border: 1px solid var(--border) !important; /* taste-skill-ignore: interactive canvas control */
+  border-radius: 9px !important;
+  box-shadow: none !important; /* taste-skill-ignore: removes third-party control shadow */
+}
+
+.react-flow__controls-button {
+  width: 34px !important;
+  height: 34px !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--border) !important; /* taste-skill-ignore: grouped canvas controls */
+  background: var(--elevated) !important;
+  fill: var(--taupe) !important;
+}
+
+.react-flow__controls-button:hover {
+  background: var(--surface) !important;
+  fill: var(--ivory) !important;
+}
+
+.react-flow__controls-button:last-child {
+  border-bottom: 0 !important;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button,
+a,
+input,
+select,
+textarea {
+  outline-color: var(--sandstone);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--sandstone);
+  color: var(--background);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

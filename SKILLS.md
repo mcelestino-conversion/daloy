@@ -11,6 +11,7 @@ Installed on 2026-10-20 in `.agents/skills/` for this project.
 | deploy-to-vercel | Vercel deployment workflows | vercel-labs/agent-skills |
 | neon | Neon setup and database skill routing | neondatabase/agent-skills |
 | neon-postgres | Postgres connections, migrations, branching, and queries | neondatabase/agent-skills |
+| neon-postgres-branches | Isolated staging, production, and migration-test branches | neondatabase/agent-skills |
 | typescript-advanced-types | Type-safe interfaces and reusable types | wshobson/agents |
 | playwright-best-practices | Browser tests and test debugging | currents-dev/playwright-best-practices-skill |
 | impeccable | UI design, critique, accessibility audits, and visual polish | pbakaus/impeccable |
@@ -121,3 +122,19 @@ installation: cloud, proxy, telemetry hooks, and named agent presets are not
 configured. Skills that refer to those services require their separate setup
 when requested. Compression uses a configured model provider; do not run it
 merely as part of skill installation. No token savings have been measured.
+
+## Neon tooling additions — 2026-10-27
+
+Fetched and followed the current [Neon setup skill](https://neon.com/.well-known/agent-skills/neon/SKILL.md).
+The existing pinned `neon` and `neon-postgres` installations were retained and their
+file hashes verified. Installed only the missing `neon-postgres-branches` skill
+with `npx --yes neon skills -s neon-postgres-branches --agent codex -y`.
+`skills-lock.json` records the installer's source hash; `skill-sources.json`
+records the installed files' SHA-256 hashes.
+
+Added project-local Neon MCP configuration in `.codex/config.toml` using
+`npx --yes neon mcp --oauth --project --agent codex -y`. This points to
+`https://mcp.neon.tech/mcp` and contains no credentials. Global Codex configuration
+was not modified. MCP OAuth sign-in is separate from the Neon CLI session; the
+agent prompts for it on first use. The authenticated CLI can be invoked with
+`npx --yes neon` without adding an application dependency.
