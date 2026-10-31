@@ -919,6 +919,16 @@
         "scripts/tests/test_web_stack_freshness.py": "74897571398585f27e2c35d09d81b0a531c8c774f4a2967e5e1b1d1b05a483d9",
         "scripts/validate_data.py": "a599aa256049cf30954d1f164721b99e453eb7e4cb8241bcab2d5573e6cf58b8"
       }
+    },
+    "neon-postgres-branches": {
+      "upstream": "neondatabase/agent-skills",
+      "upstreamPath": "skills/neon-postgres-branches",
+      "installedAt": "2026-10-27",
+      "installer": "neon skills -s neon-postgres-branches --agent codex -y",
+      "computedHash": "d6b7ecfc52508c57bd3c8572a7cd0c582c256e36731124eb8598e8b24780ab1d",
+      "sha256": {
+        "SKILL.md": "9f47d5a49553a465837c1e8b2d90a90aac72a5313a996c081027290f259a8d71"
+      }
     }
   }
 }

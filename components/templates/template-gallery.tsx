@@ -29,9 +29,9 @@ export function TemplateGallery() {
 
   const visible = useMemo(() => filterTemplates(workflowTemplates, query, category), [query, category]);
 
-  function useTemplate(template: Template) {
+  async function useTemplate(template: Template) {
     const workflow = createWorkflowFromTemplate(template);
-    saveWorkflow(workflow);
+    if (!await saveWorkflow(workflow)) return;
     router.push(`/flows/${workflow.id}`);
   }
 

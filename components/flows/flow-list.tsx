@@ -23,23 +23,23 @@ export function FlowList() {
   const [deleteTarget, setDeleteTarget] = useState<Workflow | null>(null);
   const [notice, setNotice] = useState("");
 
-  function duplicate(source: Workflow) {
+  async function duplicate(source: Workflow) {
     const copy = duplicateWorkflow(source);
     copy.name = nextDuplicateName(source.name, workflows.map((workflow) => workflow.name));
-    saveWorkflow(copy);
+    if (!await saveWorkflow(copy)) return;
     setNotice(`${copy.name} was created as a draft.`);
   }
 
-  function confirmDelete() {
+  async function confirmDelete() {
     if (!deleteTarget) return;
-    deleteWorkflow(deleteTarget.id);
-    setNotice(`${deleteTarget.name} was deleted from this browser.`);
+    if (!await deleteWorkflow(deleteTarget.id)) return;
+    setNotice(`${deleteTarget.name} was deleted.`);
     setDeleteTarget(null);
   }
 
   return (
     <div>
-      <PageHeader title="My Flows" description="Create, activate, and manage the automations stored in this browser." actions={<><Link href="/templates" className="inline-flex h-10 items-center justify-center rounded-[9px] border border-border bg-elevated px-4 text-sm font-medium text-ivory transition hover:bg-surface">Browse templates</Link><Link href="/flows/new" className="inline-flex h-10 items-center justify-center gap-2 rounded-[9px] border border-sandstone bg-sandstone px-4 text-sm font-medium text-background transition hover:bg-ivory"><Plus className="size-4" />Create Flow</Link></>} />
+      <PageHeader title="My Flows" description="Create, activate, and manage the automations saved in your workspace." actions={<><Link href="/templates" className="inline-flex h-10 items-center justify-center rounded-[9px] border border-border bg-elevated px-4 text-sm font-medium text-ivory transition hover:bg-surface">Browse templates</Link><Link href="/flows/new" className="inline-flex h-10 items-center justify-center gap-2 rounded-[9px] border border-sandstone bg-sandstone px-4 text-sm font-medium text-background transition hover:bg-ivory"><Plus className="size-4" />Create Flow</Link></>} />
       {notice ? <p role="status" className="mt-5 rounded-lg border border-[#5a5246] bg-[#302b24] px-4 py-3 text-sm text-sandstone">{notice}</p> : null}
       {workflows.length ? <div className="mt-7 overflow-hidden rounded-xl border border-border bg-surface">
         <div data-ui className="hidden grid-cols-[minmax(260px,1fr)_110px_120px_150px_180px] gap-4 border-b border-border px-5 py-3 text-xs font-medium uppercase tracking-[0.08em] text-taupe md:grid"><span>Flow</span><span>Status</span><span>Steps</span><span>Last run</span><span className="text-right">Actions</span></div>
@@ -56,7 +56,7 @@ export function FlowList() {
           </div>
         </article>)}
       </div> : <div className="mt-8"><EmptyState title="No flows yet" description="Start with a template or create a simple flow from scratch." action={<Link href="/templates" className="text-sm font-medium text-sandstone">Explore templates</Link>} /></div>}
-      <Dialog open={Boolean(deleteTarget)} onClose={() => setDeleteTarget(null)} title="Delete this flow?" description="This removes the local demo flow and cannot be undone.">
+      <Dialog open={Boolean(deleteTarget)} onClose={() => setDeleteTarget(null)} title="Delete this flow?" description="This removes the saved flow and cannot be undone.">
         <div className="p-6"><p className="text-sm text-taupe">You are deleting <span className="font-medium text-ivory">{deleteTarget?.name}</span>.</p><div className="mt-6 flex justify-end gap-2"><Button onClick={() => setDeleteTarget(null)}>Cancel</Button><Button variant="danger" onClick={confirmDelete}>Delete flow</Button></div></div>
       </Dialog>
     </div>
