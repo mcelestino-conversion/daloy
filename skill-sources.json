@@ -929,6 +929,24 @@
       "sha256": {
         "SKILL.md": "9f47d5a49553a465837c1e8b2d90a90aac72a5313a996c081027290f259a8d71"
       }
+    },
+    "ponytail": {
+      "upstream": "DietrichGebert/ponytail",
+      "upstreamCommit": "96608e078b2d5ea607c5c3b8b5a54d1c1fba6846",
+      "upstreamPath": "skills/ponytail",
+      "installedAt": "2026-10-31",
+      "sha256": {
+        "SKILL.md": "9badd22a32e19cb884e46dfa8d3aae82bb81dfa5484105b8b4f0262df823a509"
+      }
+    },
+    "unslop": {
+      "upstream": "cursor/plugins",
+      "upstreamCommit": "4dd1d05818d19792e7cd6e818f1667f95f7e1dbe",
+      "upstreamPath": "pstack/skills/unslop",
+      "installedAt": "2026-10-31",
+      "sha256": {
+        "SKILL.md": "ccab208e315ce05e2fab8eeee2f7879f1289b5c6844840b2d307adf31c79144f"
+      }
     }
   }
 }

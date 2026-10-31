@@ -18,6 +18,8 @@ Installed on 2026-10-20 in `.agents/skills/` for this project.
 | ui-ux-pro-max | Searchable UI styles, palettes, typography, UX, and stack guidance | nextlevelbuilder/ui-ux-pro-max-skill |
 | graphify | Build and query persistent knowledge graphs of project files | Graphify-Labs/graphify |
 | design-taste-frontend | Art direction, page and app design, browser inspection | leonxlnx/taste-skill |
+| ponytail | Keep coding changes small and explanations concise | DietrichGebert/ponytail |
+| unslop | Remove AI writing tells from prose | cursor/plugins |
 | using-superpowers | Workflow entry point and skill selection | obra/superpowers |
 | brainstorming | Clarify intent and design before implementation | obra/superpowers |
 | writing-plans | Prepare implementation plans | obra/superpowers |
@@ -138,3 +140,12 @@ Added project-local Neon MCP configuration in `.codex/config.toml` using
 was not modified. MCP OAuth sign-in is separate from the Neon CLI session; the
 agent prompts for it on first use. The authenticated CLI can be invoked with
 `npx --yes neon` without adding an application dependency.
+
+## Ponytail and Unslop — 2026-10-31
+
+Installed project-local copies of `ponytail` from `DietrichGebert/ponytail`
+(commit `96608e078b2d5ea607c5c3b8b5a54d1c1fba6846`) and `unslop` from
+`cursor/plugins` (commit `4dd1d05818d19792e7cd6e818f1667f95f7e1dbe`).
+`skill-sources.json` records the upstream paths and SHA-256 hashes of all
+installed files. Invoke `$ponytail` or `$unslop`. Existing global copies remain
+available for other projects.
