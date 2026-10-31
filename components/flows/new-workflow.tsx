@@ -16,8 +16,10 @@ export function NewWorkflow() {
     if (!hydrated || created.current) return;
     created.current = true;
     const workflow = createBlankWorkflow();
-    saveWorkflow(workflow);
-    router.replace(`/flows/${workflow.id}`);
+    void saveWorkflow(workflow).then(saved => {
+      if (saved) router.replace(`/flows/${workflow.id}`);
+      else router.replace("/flows");
+    });
   }, [hydrated, router, saveWorkflow]);
 
   return <div className="grid h-full place-items-center"><div className="text-center"><LoaderCircle className="mx-auto size-5 animate-spin text-sandstone" aria-hidden="true" /><p className="mt-3 text-sm text-taupe">Preparing your flow…</p></div></div>;

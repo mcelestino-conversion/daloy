@@ -5,3 +5,7 @@ tsconfig.tsbuildinfo
 playwright-report/
 test-results/
 .DS_Store
+.env*
+!.env.example
+
+.vercel/

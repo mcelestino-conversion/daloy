@@ -41,7 +41,7 @@ export function WorkflowBuilder({ workflowId }: { workflowId: string }) {
   const openPicker = useCallback((index: number) => setInsertAt(index), []);
 
   if (!hydrated && !workflow) return <div className="grid h-full place-items-center"><LoaderCircle className="size-5 animate-spin text-sandstone" aria-label="Loading workflow" /></div>;
-  if (!workflow) return <div className="grid h-full place-items-center p-6"><EmptyState title="Flow not found" description="This workflow may have been removed from local demo data." action={<Link href="/flows" className="text-sm text-sandstone">Return to My Flows</Link>} /></div>;
+  if (!workflow) return <div className="grid h-full place-items-center p-6"><EmptyState title="Flow not found" description="This workflow may have been removed from your workspace." action={<Link href="/flows" className="text-sm text-sandstone">Return to My Flows</Link>} /></div>;
   const currentWorkflow = workflow;
 
   function updateNode(nextNode: WorkflowNodeData) {
@@ -69,24 +69,25 @@ export function WorkflowBuilder({ workflowId }: { workflowId: string }) {
     setWorkflow(moveNode(currentWorkflow, selectedNode.id, selectedIndex + direction));
   }
 
-  function save() {
-    saveWorkflow(currentWorkflow);
-    setNotice("Draft saved to this browser.");
+  async function save() {
+    setNotice("Saving…");
+    if (await saveWorkflow(currentWorkflow)) setNotice("Draft saved.");
+    else setNotice("Save failed. Please try again.");
   }
 
-  function toggleActive() {
+  async function toggleActive() {
     const next: Workflow = { ...currentWorkflow, status: currentWorkflow.status === "active" ? "paused" : "active", updatedAt: new Date().toISOString() };
-    setWorkflow(next);
-    saveWorkflow(next);
+    if (!await saveWorkflow(next)) return;
+    setWorkflow(current => current ? { ...current, status: next.status, updatedAt: current === currentWorkflow ? next.updatedAt : current.updatedAt } : current);
     setNotice(next.status === "active" ? "Flow activated in demo mode." : "Flow paused.");
   }
 
-  function runSimulation() {
+  async function runSimulation() {
     const execution = simulateWorkflow(currentWorkflow);
     const updated: Workflow = { ...currentWorkflow, lastRunAt: execution.finishedAt, updatedAt: execution.finishedAt };
-    setWorkflow(updated);
-    saveWorkflow(updated);
-    addExecution(execution);
+    if (!await saveWorkflow(updated)) return;
+    if (!await addExecution(execution)) return;
+    setWorkflow(current => current ? { ...current, lastRunAt: updated.lastRunAt, updatedAt: current === currentWorkflow ? updated.updatedAt : current.updatedAt } : current);
     setSimulation(execution);
     setLogsOpen(true);
     setSimulating(true);
